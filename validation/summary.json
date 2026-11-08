@@ -1,0 +1,225 @@
+{
+  "structure_only": false,
+  "templates": [
+    {
+      "template": "jlc-2layer-1oz-prototype",
+      "structure": "passed",
+      "copper_layers": 2,
+      "native_cases": [
+        {
+          "case": "empty_project_with_outline",
+          "expected": [],
+          "detected": [],
+          "result": "passed"
+        },
+        {
+          "case": "narrow_outer_track",
+          "expected": [
+            "track_width"
+          ],
+          "detected": [
+            "track_dangling",
+            "track_width"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_via_drill",
+          "expected": [
+            "drill_out_of_range"
+          ],
+          "detected": [
+            "drill_out_of_range",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_via_outer",
+          "expected": [
+            "via_diameter"
+          ],
+          "detected": [
+            "via_dangling",
+            "via_diameter"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_annular_ring",
+          "expected": [
+            "annular_width"
+          ],
+          "detected": [
+            "annular_width",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_track_clearance",
+          "expected": [
+            "clearance"
+          ],
+          "detected": [
+            "clearance",
+            "track_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_via_hole_clearance",
+          "expected": [
+            "hole_to_hole"
+          ],
+          "detected": [
+            "hole_to_hole",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_silkscreen_gap",
+          "expected": [
+            "silk_overlap|silk_over_copper"
+          ],
+          "detected": [
+            "missing_courtyard",
+            "silk_over_copper"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_silkscreen_text",
+          "expected": [
+            "text_height",
+            "text_thickness"
+          ],
+          "detected": [
+            "text_height",
+            "text_thickness"
+          ],
+          "result": "passed"
+        }
+      ],
+      "empty_schematic_erc": "passed",
+      "renamed_project": "passed"
+    },
+    {
+      "template": "jlc-4layer-1oz-prototype",
+      "structure": "passed",
+      "copper_layers": 4,
+      "native_cases": [
+        {
+          "case": "empty_project_with_outline",
+          "expected": [],
+          "detected": [],
+          "result": "passed"
+        },
+        {
+          "case": "narrow_outer_track",
+          "expected": [
+            "track_width"
+          ],
+          "detected": [
+            "track_dangling",
+            "track_width"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "narrow_inner_track",
+          "expected": [
+            "track_width"
+          ],
+          "detected": [
+            "track_dangling",
+            "track_width"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_via_drill",
+          "expected": [
+            "drill_out_of_range"
+          ],
+          "detected": [
+            "drill_out_of_range",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_via_outer",
+          "expected": [
+            "via_diameter"
+          ],
+          "detected": [
+            "via_dangling",
+            "via_diameter"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_annular_ring",
+          "expected": [
+            "annular_width"
+          ],
+          "detected": [
+            "annular_width",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_track_clearance",
+          "expected": [
+            "clearance"
+          ],
+          "detected": [
+            "clearance",
+            "track_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_via_hole_clearance",
+          "expected": [
+            "hole_to_hole"
+          ],
+          "detected": [
+            "hole_to_hole",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_silkscreen_gap",
+          "expected": [
+            "silk_overlap|silk_over_copper"
+          ],
+          "detected": [
+            "missing_courtyard",
+            "silk_over_copper"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "small_silkscreen_text",
+          "expected": [
+            "text_height",
+            "text_thickness"
+          ],
+          "detected": [
+            "text_height",
+            "text_thickness"
+          ],
+          "result": "passed"
+        }
+      ],
+      "empty_schematic_erc": "passed",
+      "renamed_project": "passed"
+    }
+  ],
+  "kicad_version": "10.0.7"
+}

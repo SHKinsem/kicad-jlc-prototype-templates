@@ -1,0 +1,72 @@
+(version 1)
+# KiCad 10 / JLC FR4 4-layer, 1 oz, routed prototype baseline.
+# Selected design margins, not a universal electrical-insulation standard.
+# Sources and limitations: RULES.md. Verified 2026-11-08.
+
+(rule "Signal track width: selected 0.127 mm on every copper layer"
+  (condition "A.Type == 'Track'")
+  (constraint track_width (min 0.127mm)))
+
+(rule "Signal track clearance: selected 0.127 mm"
+  (condition "A.Type == 'Track' && B.Type == 'Track' && A.Net != B.Net")
+  (constraint clearance (min 0.127mm)))
+
+(rule "Pad to track: inherited 0.20 mm design margin"
+  (condition "A.Type == 'Pad' && B.Type == 'Track' && A.Net != B.Net")
+  (constraint clearance (min 0.2mm)))
+
+(rule "Routed copper-to-board-edge design margin"
+  (constraint edge_clearance (min 0.3mm)))
+
+(rule "Minimum drilled hole"
+  (constraint hole_size (min 0.2mm) (max 6.3mm)))
+
+(rule "NPTH minimum drill"
+  (condition "A.Type == 'Pad' && !A.isPlated()")
+  (constraint hole_size (min 0.5mm)))
+
+(rule "Plated annular ring: inherited baseline"
+  (condition "A.isPlated()")
+  (constraint annular_width (min 0.075mm)))
+
+(rule "Holes involving component pads"
+  (constraint hole_to_hole (min 0.45mm)))
+
+(rule "Track to NPTH drill wall: design margin"
+  (condition "A.Type == 'Pad' && !A.isPlated() && B.Type == 'Track' && A.Net != B.Net")
+  (constraint hole_clearance (min 0.254mm)))
+
+(rule "Track to plated component drill wall: design margin"
+  (condition "A.Type == 'Pad' && A.isPlated() && B.Type == 'Track' && A.Net != B.Net")
+  (constraint hole_clearance (min 0.33mm)))
+
+# Via-specific rules follow generic hole rules so they take precedence.
+(rule "Via outer diameter"
+  (condition "A.Type == 'Via'")
+  (constraint via_diameter (min 0.4mm)))
+
+(rule "Via drill"
+  (condition "A.Type == 'Via'")
+  (constraint hole_size (min 0.2mm)))
+
+(rule "Via to different-net copper: inherited baseline"
+  (condition "(A.Type == 'Via' || B.Type == 'Via') && A.Net != B.Net")
+  (constraint clearance (min 0.127mm)))
+
+(rule "Via drill wall to different-net copper"
+  (condition "A.Type == 'Via' && A.Net != B.Net")
+  (constraint hole_clearance (min 0.2mm)))
+
+(rule "Via drill wall to via drill wall: either net relationship"
+  (condition "A.Type == 'Via' && B.Type == 'Via'")
+  (constraint hole_to_hole (min 0.254mm)))
+
+(rule "Silkscreen text: chosen readable defaults"
+  (layer "?.Silkscreen")
+  (condition "A.Type == 'Text' || A.Type == 'Text Box'")
+  (constraint text_height (min 1mm))
+  (constraint text_thickness (min 0.15mm)))
+
+(rule "Pad to silkscreen"
+  (condition "A.Type == 'Pad' && B.Layer == '?.Silkscreen'")
+  (constraint silk_clearance (min 0.15mm)))

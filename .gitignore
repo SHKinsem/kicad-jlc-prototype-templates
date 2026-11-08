@@ -1,0 +1,10 @@
+*.kicad_prl
+*.lck
+~*.kicad_*
+_autosave-*
+*-backups/
+.history/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
