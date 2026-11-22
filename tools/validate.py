@@ -20,6 +20,14 @@ def structure():
         assert not pro['sheets']
         assert not any(v=='ignore' for v in pro['board']['design_settings']['rule_severities'].values())
         assert pro['net_settings']['classes'][0]['clearance']==.127
+        if count == 2:
+            settings = pro['board']['design_settings']
+            default = next(c for c in pro['net_settings']['classes'] if c['name'] == 'Default')
+            assert default['via_diameter'] == 0.55 and default['via_drill'] == 0.30
+            assert settings['rules']['min_through_hole_diameter'] == 0.30
+            assert settings['rules']['min_via_diameter'] == 0.50
+            vias = [(v['diameter'], v['drill']) for v in settings['via_dimensions'] if v['diameter'] or v['drill']]
+            assert vias == [(0.55, 0.30), (0.50, 0.30), (0.60, 0.40), (0.80, 0.40)]
         assert (folder/(name+'.kicad_sch')).exists()
         assert '<title>' in (folder/'meta/info.html').read_text(encoding='utf-8')
         assert (folder/'RULES.md').exists()
@@ -70,6 +78,12 @@ def native(cli,summary):
             cases.append(check('narrow_outer_track',track(.1),['track_width']))
             if count==4:cases.append(check('narrow_inner_track',track(.1,'In1.Cu'),['track_width']))
             cases.append(check('small_via_drill',via(diameter,.15),['drill_out_of_range']))
+            if count == 2:
+                cases.append(check('via_drill_029_rejected',via(.55,.29),['drill_out_of_range']))
+                for boundary in (.50, .55):
+                    result=check(f'via_{boundary:.2f}_030_dimensionally_accepted',via(boundary,.30),['via_dangling'])
+                    assert set(result['detected']) == {'via_dangling'}, result
+                    cases.append(result)
             cases.append(check('small_via_outer',via(.45 if count==2 else .35,drill),['via_diameter']))
             cases.append(check('small_annular_ring',via(.5 if count==2 else .4,.4 if count==2 else .3),['annular_width']))
             cases.append(check('small_track_clearance',track(.2)+track(.2,y=105.3,net='SIGNAL_B'),['clearance']))

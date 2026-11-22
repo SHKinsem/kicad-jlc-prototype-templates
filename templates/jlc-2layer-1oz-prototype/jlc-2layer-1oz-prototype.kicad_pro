@@ -115,6 +115,10 @@
           "drill": 0.0
         },
         {
+          "diameter": 0.55,
+          "drill": 0.3
+        },
+        {
           "diameter": 0.5,
           "drill": 0.3
         },
@@ -222,7 +226,7 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2,
         "tuning_profile": "",
-        "via_diameter": 0.5,
+        "via_diameter": 0.55,
         "via_drill": 0.3,
         "wire_width": 6
       }

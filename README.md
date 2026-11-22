@@ -4,12 +4,12 @@
 
 | 模板 | 默认过孔（外径／孔径） | 最小过孔外径／孔径 | 最小线宽／线距 |
 |---|---|---|---|
-| `jlc-2layer-1oz-prototype` | 0.50／0.30 mm | 0.50／0.30 mm | 0.127／0.127 mm |
+| `jlc-2layer-1oz-prototype` | 0.55／0.30 mm | 0.50／0.30 mm | 0.127／0.127 mm |
 | `jlc-4layer-1oz-prototype` | 0.45／0.20 mm | 0.40／0.20 mm | 0.127／0.127 mm |
 
 共同设置：1.6 mm 标称板厚，默认走线宽 0.20 mm，丝印距焊盘 0.15 mm，默认丝印字高 1 mm、笔画 0.15 mm，过孔默认双面盖油。四层模板的 0.127 mm 线宽规则同时适用于内层和外层。
 
-模板不依赖 0.15 mm 非常规钻孔。具体板价、优惠、工厂接单能力仍以订单审核为准。
+两层模板通孔预设为 0.55／0.30、0.50／0.30、0.60／0.40、0.80／0.40 mm（外径／孔径），默认优先 0.55／0.30 mm；0.50／0.30 mm 可作空间紧张的备选。不使用小于 0.30 mm 的两层普通通孔钻孔，无需启用额外小孔工艺。0.20 mm 的线宽或孔壁间距不是钻孔设置。具体板价、优惠、工厂接单能力仍以订单审核为准。
 
 ## 使用
 
@@ -48,7 +48,7 @@ python tools/validate.py --structure-only
 
 Two blank KiCad 10 project templates for 2-layer and 4-layer FR4 / 1 oz prototypes. Copy the folders under `templates/` into `KICAD_USER_TEMPLATE_DIR`, then create a new project using the KiCad template selector. Project files and the custom-rule file are renamed together.
 
-The selected track minimum is 0.127 mm on all copper layers. Default vias are 0.50/0.30 mm for two layers and 0.45/0.20 mm for four layers (outer/drill). No board outline, components, local libraries, project nets, or historical DRC exclusions are included. Draw an outline before running a normal board DRC. Read `RULES.md` before using these manufacturing baselines.
+The selected track minimum is 0.127 mm on all copper layers. Default vias are 0.55/0.30 mm for two layers (0.50/0.30 mm compact minimum) and 0.45/0.20 mm for four layers (outer/drill). No board outline, components, local libraries, project nets, or historical DRC exclusions are included. Draw an outline before running a normal board DRC. Read `RULES.md` before using these manufacturing baselines.
 
 ## 来源与许可
 
