@@ -40,10 +40,12 @@
   (condition "A.Type == 'Pad' && A.isPlated() && B.Type == 'Track' && A.Net != B.Net")
   (constraint hole_clearance (min 0.33mm)))
 
+# Order-specific trial: ordinary published minimum is 0.50 / 0.30 mm.
+# Confirm actual manufacturing review before exporting fabrication data.
 # Via-specific rules follow generic hole rules so they take precedence.
 (rule "Via outer diameter"
   (condition "A.Type == 'Via'")
-  (constraint via_diameter (min 0.5mm)))
+  (constraint via_diameter (min 0.45mm)))
 
 (rule "Via drill"
   (condition "A.Type == 'Via'")
