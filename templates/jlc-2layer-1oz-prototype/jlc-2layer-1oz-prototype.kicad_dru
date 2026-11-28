@@ -15,6 +15,10 @@
   (condition "A.Type == 'Pad' && B.Type == 'Track' && A.Net != B.Net")
   (constraint clearance (min 0.2mm)))
 
+(rule "Pad to pad: JLC 1 oz green-mask bridge minimum 0.10 mm"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad'")
+  (constraint clearance (min 0.1mm)))
+
 (rule "Routed copper-to-board-edge design margin"
   (constraint edge_clearance (min 0.3mm)))
 

@@ -35,11 +35,45 @@
           "result": "passed"
         },
         {
+          "case": "via_drill_029_rejected",
+          "expected": [
+            "drill_out_of_range"
+          ],
+          "detected": [
+            "drill_out_of_range",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "via_outer_044_rejected",
+          "expected": [
+            "via_diameter"
+          ],
+          "detected": [
+            "annular_width",
+            "via_dangling",
+            "via_diameter"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "via_045_030_dimensionally_accepted",
+          "expected": [
+            "via_dangling"
+          ],
+          "detected": [
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
           "case": "small_via_outer",
           "expected": [
             "via_diameter"
           ],
           "detected": [
+            "annular_width",
             "via_dangling",
             "via_diameter"
           ],
@@ -86,6 +120,27 @@
           "detected": [
             "missing_courtyard",
             "silk_over_copper"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "pad_to_pad_009_rejected",
+          "expected": [
+            "clearance"
+          ],
+          "detected": [
+            "clearance",
+            "missing_courtyard"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "pad_to_pad_010_accepted",
+          "expected": [
+            "missing_courtyard"
+          ],
+          "detected": [
+            "missing_courtyard"
           ],
           "result": "passed"
         },
@@ -150,11 +205,34 @@
           "result": "passed"
         },
         {
+          "case": "via_drill_029_rejected",
+          "expected": [
+            "drill_out_of_range"
+          ],
+          "detected": [
+            "drill_out_of_range",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "via_outer_049_rejected",
+          "expected": [
+            "via_diameter"
+          ],
+          "detected": [
+            "via_dangling",
+            "via_diameter"
+          ],
+          "result": "passed"
+        },
+        {
           "case": "small_via_outer",
           "expected": [
             "via_diameter"
           ],
           "detected": [
+            "annular_width",
             "via_dangling",
             "via_diameter"
           ],
@@ -205,6 +283,27 @@
           "result": "passed"
         },
         {
+          "case": "pad_to_pad_009_rejected",
+          "expected": [
+            "clearance"
+          ],
+          "detected": [
+            "clearance",
+            "missing_courtyard"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "pad_to_pad_010_accepted",
+          "expected": [
+            "missing_courtyard"
+          ],
+          "detected": [
+            "missing_courtyard"
+          ],
+          "result": "passed"
+        },
+        {
           "case": "small_silkscreen_text",
           "expected": [
             "text_height",
@@ -221,5 +320,5 @@
       "renamed_project": "passed"
     }
   ],
-  "kicad_version": "10.0.7"
+  "kicad_version": "10.0.3"
 }

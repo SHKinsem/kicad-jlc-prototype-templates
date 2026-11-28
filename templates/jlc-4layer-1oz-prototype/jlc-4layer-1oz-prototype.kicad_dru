@@ -15,11 +15,15 @@
   (condition "A.Type == 'Pad' && B.Type == 'Track' && A.Net != B.Net")
   (constraint clearance (min 0.2mm)))
 
+(rule "Pad to pad: JLC 1 oz green-mask bridge minimum 0.10 mm"
+  (condition "A.Type == 'Pad' && B.Type == 'Pad'")
+  (constraint clearance (min 0.1mm)))
+
 (rule "Routed copper-to-board-edge design margin"
   (constraint edge_clearance (min 0.3mm)))
 
 (rule "Minimum drilled hole"
-  (constraint hole_size (min 0.2mm) (max 6.3mm)))
+  (constraint hole_size (min 0.3mm) (max 6.3mm)))
 
 (rule "NPTH minimum drill"
   (condition "A.Type == 'Pad' && !A.isPlated()")
@@ -40,14 +44,15 @@
   (condition "A.Type == 'Pad' && A.isPlated() && B.Type == 'Track' && A.Net != B.Net")
   (constraint hole_clearance (min 0.33mm)))
 
+# Ordinary 0.50 / 0.30 mm vias: free/prototype orders need drills >= 0.30 mm.
 # Via-specific rules follow generic hole rules so they take precedence.
 (rule "Via outer diameter"
   (condition "A.Type == 'Via'")
-  (constraint via_diameter (min 0.4mm)))
+  (constraint via_diameter (min 0.5mm)))
 
 (rule "Via drill"
   (condition "A.Type == 'Via'")
-  (constraint hole_size (min 0.2mm)))
+  (constraint hole_size (min 0.3mm)))
 
 (rule "Via to different-net copper: inherited baseline"
   (condition "(A.Type == 'Via' || B.Type == 'Via') && A.Net != B.Net")
