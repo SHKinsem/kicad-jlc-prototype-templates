@@ -205,11 +205,34 @@
           "result": "passed"
         },
         {
+          "case": "via_drill_029_rejected",
+          "expected": [
+            "drill_out_of_range"
+          ],
+          "detected": [
+            "drill_out_of_range",
+            "via_dangling"
+          ],
+          "result": "passed"
+        },
+        {
+          "case": "via_outer_049_rejected",
+          "expected": [
+            "via_diameter"
+          ],
+          "detected": [
+            "via_dangling",
+            "via_diameter"
+          ],
+          "result": "passed"
+        },
+        {
           "case": "small_via_outer",
           "expected": [
             "via_diameter"
           ],
           "detected": [
+            "annular_width",
             "via_dangling",
             "via_diameter"
           ],

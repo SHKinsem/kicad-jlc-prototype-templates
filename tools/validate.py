@@ -28,6 +28,14 @@ def structure():
             assert settings['rules']['min_via_diameter'] == 0.45
             vias = [(v['diameter'], v['drill']) for v in settings['via_dimensions'] if v['diameter'] or v['drill']]
             assert vias == [(0.45, 0.30), (0.50, 0.30), (0.60, 0.40), (0.80, 0.40)]
+        else:
+            settings = pro['board']['design_settings']
+            default = next(c for c in pro['net_settings']['classes'] if c['name'] == 'Default')
+            assert default['via_diameter'] == 0.50 and default['via_drill'] == 0.30
+            assert settings['rules']['min_through_hole_diameter'] == 0.30
+            assert settings['rules']['min_via_diameter'] == 0.50
+            vias = [(v['diameter'], v['drill']) for v in settings['via_dimensions'] if v['diameter'] or v['drill']]
+            assert vias == [(0.50, 0.30), (0.60, 0.40), (0.80, 0.40)]
         assert (folder/(name+'.kicad_sch')).exists()
         assert '<title>' in (folder/'meta/info.html').read_text(encoding='utf-8')
         assert (folder/'RULES.md').exists()
@@ -73,7 +81,7 @@ def native(cli,summary):
                 else:assert all(set(item.split('|'))&found for item in expected),(label,expected,found)
                 print(name+': '+label+' passed',flush=True)
                 return {'case':label,'expected':expected,'detected':sorted(found),'result':'passed'}
-            diameter=.5 if count==2 else .45;drill=.3 if count==2 else .2
+            diameter=.5;drill=.3
             cases=[check('empty_project_with_outline','',[])]
             cases.append(check('narrow_outer_track',track(.1),['track_width']))
             if count==4:cases.append(check('narrow_inner_track',track(.1,'In1.Cu'),['track_width']))
@@ -84,8 +92,11 @@ def native(cli,summary):
                 result=check('via_045_030_dimensionally_accepted',via(.45,.30),['via_dangling'])
                 assert set(result['detected']) == {'via_dangling'}, result
                 cases.append(result)
-            cases.append(check('small_via_outer',via(.44 if count==2 else .35,drill),['via_diameter']))
-            cases.append(check('small_annular_ring',via(.5 if count==2 else .4,.4 if count==2 else .3),['annular_width']))
+            if count == 4:
+                cases.append(check('via_drill_029_rejected',via(.5,.29),['drill_out_of_range']))
+                cases.append(check('via_outer_049_rejected',via(.49,.30),['via_diameter']))
+            cases.append(check('small_via_outer',via(.44,drill),['via_diameter']))
+            cases.append(check('small_annular_ring',via(.5,.4),['annular_width']))
             cases.append(check('small_track_clearance',track(.2)+track(.2,y=105.3,net='SIGNAL_B'),['clearance']))
             cases.append(check('small_via_hole_clearance',via(diameter,drill)+via(diameter,drill,x=110.+drill+.24),['hole_to_hole']))
             pad=f'''(footprint "ValidationPad" (layer "F.Cu") (at 110 110) (uuid "{uid()}")
