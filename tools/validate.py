@@ -92,6 +92,14 @@ def native(cli,summary):
               (pad "1" smd rect (at 0 0) (size 1 1) (layers "F.Cu" "F.Mask" "F.Paste") (net "SIGNAL_A") (uuid "{uid()}")))
               (gr_line (start 109.5 110.7) (end 110.5 110.7) (stroke (width 0.15) (type default)) (layer "F.SilkS") (uuid "{uid()}"))'''
             cases.append(check('small_silkscreen_gap',pad,['silk_overlap|silk_over_copper']))
+            def pads(gap):
+                return f'''(footprint "ValidationPads" (layer "F.Cu") (at 110 110) (uuid "{uid()}")
+                  (pad "1" smd rect (at 0 0) (size 0.5 0.5) (layers "F.Cu" "F.Mask") (net "SIGNAL_A") (uuid "{uid()}"))
+                  (pad "2" smd rect (at {.5+gap:.3f} 0) (size 0.5 0.5) (layers "F.Cu" "F.Mask") (net "SIGNAL_B") (uuid "{uid()}")))'''
+            cases.append(check('pad_to_pad_009_rejected',pads(.09),['clearance']))
+            result=check('pad_to_pad_010_accepted',pads(.10),['missing_courtyard'])
+            assert set(result['detected']) == {'missing_courtyard'}, result
+            cases.append(result)
             text=f'(gr_text "TEST" (at 110 110) (layer "F.SilkS") (uuid "{uid()}") (effects (font (size 0.5 0.5) (thickness 0.1))))'
             cases.append(check('small_silkscreen_text',text,['text_height','text_thickness']))
             erc=dst/'erc.json'
